@@ -1,0 +1,28 @@
+name: Assets
+
+on:
+  schedule:
+    - cron: "59 23 * * *"
+  workflow_dispatch:
+
+jobs:
+  download-binary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ⤵️ Get Kind binary
+        run: |
+          ./.github/scripts/get-kind-binary.sh
+      - name: ✍🏻 Create PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: Update Kind binary
+          title: Update Kind binary
+          body: |
+            This PR updates the Kind binary used by Devantler.AgeCLI to the latest version.
+          branch: update-kind-binary
+          delete-branch: true
+          labels: dependencies
+          reviewers: devantler
+          assignees: devantler
+          signoff: true
