@@ -18,7 +18,7 @@ get() {
   chmod +x "$target_dir/$target_name"
 }
 
-get "https://getbin.io/kubernetes-sigs/kind?os=darwin&arch=amd64" "kind" "src/KSail/assets/binaries" "kind-darwin-amd64" false
-get "https://getbin.io/kubernetes-sigs/kind?os=darwin&arch=arm64" "kind" "src/KSail/assets/binaries" "kind-darwin-arm64" false
-get "https://getbin.io/kubernetes-sigs/kind?os=linux&arch=amd64" "kind" "src/KSail/assets/binaries" "kind-linux-amd64" false
-get "https://getbin.io/kubernetes-sigs/kind?os=linux&arch=arm64" "kind" "src/KSail/assets/binaries" "kind-linux-arm64" false
+get "https://getbin.io/kubernetes-sigs/kind?os=darwin&arch=amd64" "kind" "src/Devantler.KindCLI/assets/binaries" "kind-darwin-amd64" false
+get "https://getbin.io/kubernetes-sigs/kind?os=darwin&arch=arm64" "kind" "src/Devantler.KindCLI/assets/binaries" "kind-darwin-arm64" false
+get "https://getbin.io/kubernetes-sigs/kind?os=linux&arch=amd64" "kind" "src/Devantler.KindCLI/assets/binaries" "kind-linux-amd64" false
+get "https://getbin.io/kubernetes-sigs/kind?os=linux&arch=arm64" "kind" "src/Devantler.KindCLI/assets/binaries" "kind-linux-arm64" false
