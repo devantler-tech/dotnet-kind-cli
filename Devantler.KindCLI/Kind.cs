@@ -77,12 +77,16 @@ public static class Kind
   /// <returns></returns>
   public static async Task StartClusterAsync(string clusterName, CancellationToken cancellationToken)
   {
-    // docker start container
     using var config = new DockerClientConfiguration();
-    var client = config.CreateClient();
-    _ = await client.Containers
-      .StartContainerAsync($"{clusterName}-control-plane", new ContainerStartParameters(), cancellationToken)
-      .ConfigureAwait(false);
+    foreach (var container in await config.CreateClient().Containers.ListContainersAsync(new ContainersListParameters(), cancellationToken).ConfigureAwait(false))
+    {
+      if (container.Names.Any(name => name.StartsWith($"/{clusterName}-", StringComparison.Ordinal)))
+      {
+        _ = await config.CreateClient().Containers
+          .StartContainerAsync(container.ID, new ContainerStartParameters(), cancellationToken)
+          .ConfigureAwait(false);
+      }
+    }
   }
 
   /// <summary>
@@ -93,12 +97,16 @@ public static class Kind
   /// <returns></returns>
   public static async Task StopClusterAsync(string clusterName, CancellationToken cancellationToken)
   {
-    // docker stop container
     using var config = new DockerClientConfiguration();
-    var client = config.CreateClient();
-    _ = await client.Containers
-      .StopContainerAsync($"{clusterName}-control-plane", new ContainerStopParameters(), cancellationToken)
-      .ConfigureAwait(false);
+    foreach (var container in await config.CreateClient().Containers.ListContainersAsync(new ContainersListParameters(), cancellationToken).ConfigureAwait(false))
+    {
+      if (container.Names.Any(name => name.StartsWith($"/{clusterName}-", StringComparison.Ordinal)))
+      {
+        _ = await config.CreateClient().Containers
+          .StopContainerAsync(container.ID, new ContainerStopParameters(), cancellationToken)
+          .ConfigureAwait(false);
+      }
+    }
   }
 
   /// <summary>
