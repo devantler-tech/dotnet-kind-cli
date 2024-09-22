@@ -56,13 +56,7 @@ using Devantler.KindCLI;
 _ = await Kind.CreateClusterAsync("my-cluster", "path/to/kind-config.yaml", cancellationToken);
 
 // List all Kind clusters
-_ = await Kind.ListClustersAsync(cancellationToken);
-
-// Stop a Kind cluster
-_ = await Kind.StopClusterAsync("my-cluster", cancellationToken);
-
-// Start a Kind cluster
-_ = await Kind.StartClusterAsync("my-cluster", cancellationToken);
+_ = await Kind.GetClustersAsync(cancellationToken);
 
 // Delete a Kind cluster
 _ = await Kind.DeleteClusterAsync("my-cluster", cancellationToken);
