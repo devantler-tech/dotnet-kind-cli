@@ -19,18 +19,12 @@ public class AllMethodsTests
 
     // Act
     var createClusterException = await Record.ExceptionAsync(async () => await Kind.CreateClusterAsync(clusterName, configPath, CancellationToken.None).ConfigureAwait(false));
-    string[] clusters = await Kind.ListClustersAsync(CancellationToken.None);
-    bool clusterExists = await Kind.GetClusterAsync(clusterName, CancellationToken.None);
-    var stopClusterException = await Record.ExceptionAsync(async () => await Kind.StopClusterAsync(clusterName, CancellationToken.None).ConfigureAwait(false));
-    var startClusterException = await Record.ExceptionAsync(async () => await Kind.StartClusterAsync(clusterName, CancellationToken.None).ConfigureAwait(false));
+    string[] clusters = await Kind.GetClustersAsync(CancellationToken.None);
 
     // Assert
     Assert.Null(createClusterException);
     string expectedClusterName = Assert.Single(clusters);
     Assert.Equal(clusterName, expectedClusterName);
-    Assert.True(clusterExists);
-    Assert.Null(stopClusterException);
-    Assert.Null(startClusterException);
 
     // Cleanup
     await Kind.DeleteClusterAsync(clusterName, CancellationToken.None);

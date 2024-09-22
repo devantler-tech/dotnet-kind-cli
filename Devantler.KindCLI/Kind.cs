@@ -2,8 +2,6 @@ using System.Runtime.InteropServices;
 using CliWrap;
 using CliWrap.Exceptions;
 using Devantler.CLIRunner;
-using Docker.DotNet;
-using Docker.DotNet.Models;
 
 namespace Devantler.KindCLI;
 
@@ -70,46 +68,6 @@ public static class Kind
   }
 
   /// <summary>
-  /// Starts a Kind cluster.
-  /// </summary>
-  /// <param name="clusterName"></param>
-  /// <param name="cancellationToken"></param>
-  /// <returns></returns>
-  public static async Task StartClusterAsync(string clusterName, CancellationToken cancellationToken)
-  {
-    using var config = new DockerClientConfiguration();
-    foreach (var container in await config.CreateClient().Containers.ListContainersAsync(new ContainersListParameters(), cancellationToken).ConfigureAwait(false))
-    {
-      if (container.Names.Any(name => name.StartsWith($"/{clusterName}-", StringComparison.Ordinal)))
-      {
-        _ = await config.CreateClient().Containers
-          .StartContainerAsync(container.ID, new ContainerStartParameters(), cancellationToken)
-          .ConfigureAwait(false);
-      }
-    }
-  }
-
-  /// <summary>
-  /// Stops a Kind cluster.
-  /// </summary>
-  /// <param name="clusterName"></param>
-  /// <param name="cancellationToken"></param>
-  /// <returns></returns>
-  public static async Task StopClusterAsync(string clusterName, CancellationToken cancellationToken)
-  {
-    using var config = new DockerClientConfiguration();
-    foreach (var container in await config.CreateClient().Containers.ListContainersAsync(new ContainersListParameters(), cancellationToken).ConfigureAwait(false))
-    {
-      if (container.Names.Any(name => name.StartsWith($"/{clusterName}-", StringComparison.Ordinal)))
-      {
-        _ = await config.CreateClient().Containers
-          .StopContainerAsync(container.ID, new ContainerStopParameters(), cancellationToken)
-          .ConfigureAwait(false);
-      }
-    }
-  }
-
-  /// <summary>
   /// Deletes a Kind cluster.
   /// </summary>
   /// <param name="clusterName"></param>
@@ -133,23 +91,11 @@ public static class Kind
   }
 
   /// <summary>
-  /// Gets a Kind cluster.
-  /// </summary>
-  /// <param name="clusterName"></param>
-  /// <param name="cancellationToken"></param>
-  /// <returns></returns>
-  public static async Task<bool> GetClusterAsync(string clusterName, CancellationToken cancellationToken)
-  {
-    string[] clusterNames = await ListClustersAsync(cancellationToken).ConfigureAwait(false);
-    return clusterNames.Contains(clusterName);
-  }
-
-  /// <summary>
-  /// Lists all Kind clusters.
+  /// Gets all Kind clusters.
   /// </summary>
   /// <param name="cancellationToken"></param>
   /// <returns></returns>
-  public static async Task<string[]> ListClustersAsync(CancellationToken cancellationToken)
+  public static async Task<string[]> GetClustersAsync(CancellationToken cancellationToken)
   {
     var cmd = Command.WithArguments("get clusters");
     try
