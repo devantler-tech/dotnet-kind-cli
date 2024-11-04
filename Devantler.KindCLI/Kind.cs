@@ -43,7 +43,7 @@ public static class Kind
   /// <param name="configPath"></param>
   /// <param name="cancellationToken"></param>
   /// <returns></returns>
-  public static async Task CreateClusterAsync(string clusterName, string configPath, CancellationToken cancellationToken)
+  public static async Task CreateClusterAsync(string clusterName, string configPath, CancellationToken cancellationToken = default)
   {
     var cmd = Command.WithArguments(
         [
@@ -73,7 +73,7 @@ public static class Kind
   /// <param name="clusterName"></param>
   /// <param name="cancellationToken"></param>
   /// <returns></returns>
-  public static async Task DeleteClusterAsync(string clusterName, CancellationToken cancellationToken)
+  public static async Task DeleteClusterAsync(string clusterName, CancellationToken cancellationToken = default)
   {
     var cmd = Command.WithArguments($"delete cluster --name {clusterName}");
     try
@@ -95,7 +95,7 @@ public static class Kind
   /// </summary>
   /// <param name="cancellationToken"></param>
   /// <returns></returns>
-  public static async Task<string[]> GetClustersAsync(CancellationToken cancellationToken)
+  public static async Task<string[]> GetClustersAsync(CancellationToken cancellationToken = default)
   {
     var cmd = Command.WithArguments("get clusters");
     try
