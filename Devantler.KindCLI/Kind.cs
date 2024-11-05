@@ -58,7 +58,7 @@ public static class Kind
       var (exitCode, _) = await CLI.RunAsync(cmd, cancellationToken: cancellationToken).ConfigureAwait(false);
       if (exitCode != 0)
       {
-        throw new KindException($"Failed to create Kind cluster. Exit code: {exitCode}");
+        throw new KindException($"Failed to create Kind cluster.");
       }
     }
     catch (CommandExecutionException ex)
