@@ -22,7 +22,7 @@ jobs:
       - name: 🎯 Get version
         run: |
           BINARY_VERSION=$(./Devantler.KindCLI/runtimes/linux-x64/native/kind-linux-x64 --version | sed 's/kind version //')
-          echo "BINARY_VERSION=$BINARY_VERSION" >> $GITHUB_ENV
+          echo "BINARY_VERSION=v$BINARY_VERSION" >> $GITHUB_ENV
       - name: ✍🏻 Create PR
         uses: peter-evans/create-pull-request@v7
         with:
