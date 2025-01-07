@@ -26,10 +26,9 @@
 │       └── win-x64
 │           └── native
 └── Devantler.KindCLI.Tests
-    ├── KindTests
-    └── assets
+    └── KindTests
 
-18 directories
+17 directories
 ```
 <!-- readme-tree end -->
 
@@ -52,12 +51,5 @@ You can execute the Kind CLI commands using the `Kind` class.
 ```csharp
 using Devantler.KindCLI;
 
-// Create a new Kind cluster
-_ = await Kind.CreateClusterAsync("my-cluster", "path/to/kind-config.yaml", cancellationToken);
-
-// List all Kind clusters
-_ = await Kind.GetClustersAsync(cancellationToken);
-
-// Delete a Kind cluster
-_ = await Kind.DeleteClusterAsync("my-cluster", cancellationToken);
+var (exitCode, message) = await Kind.RunAsync(["arg1", "arg2"]);
 ```

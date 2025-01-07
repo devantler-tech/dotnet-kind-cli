@@ -37,12 +37,37 @@ public static class Kind
   }
 
   /// <summary>
+  /// Runs the kind CLI command with the given arguments.
+  /// </summary>
+  /// <param name="arguments"></param>
+  /// <param name="validation"></param>
+  /// <param name="silent"></param>
+  /// <param name="includeStdErr"></param>
+  /// <param name="cancellationToken"></param>
+  /// <returns></returns>
+  public static async Task<(int ExitCode, string Message)> RunAsync(
+    string[] arguments,
+    CommandResultValidation validation = CommandResultValidation.ZeroExitCode,
+    bool silent = false,
+    bool includeStdErr = true,
+    CancellationToken cancellationToken = default)
+  {
+    return await CLI.RunAsync(
+      Command.WithArguments(arguments),
+      validation: validation,
+      silent: silent,
+      includeStdErr: includeStdErr,
+      cancellationToken: cancellationToken).ConfigureAwait(false);
+  }
+
+  /// <summary>
   /// Creates a new Kind cluster.
   /// </summary>
   /// <param name="clusterName"></param>
   /// <param name="configPath"></param>
   /// <param name="cancellationToken"></param>
   /// <returns></returns>
+  [Obsolete("This method is deprecated. Use the RunAsync method instead.")]
   public static async Task CreateClusterAsync(string clusterName, string configPath, CancellationToken cancellationToken = default)
   {
     var cmd = Command.WithArguments(
@@ -72,7 +97,7 @@ public static class Kind
   /// </summary>
   /// <param name="clusterName"></param>
   /// <param name="cancellationToken"></param>
-  /// <returns></returns>
+  [Obsolete("This method is deprecated. Use the RunAsync method instead.")]
   public static async Task DeleteClusterAsync(string clusterName, CancellationToken cancellationToken = default)
   {
     var cmd = Command.WithArguments($"delete cluster --name {clusterName}");
@@ -94,7 +119,7 @@ public static class Kind
   /// Gets all Kind clusters.
   /// </summary>
   /// <param name="cancellationToken"></param>
-  /// <returns></returns>
+  [Obsolete("This method is deprecated. Use the RunAsync method instead.")]
   public static async Task<string[]> GetClustersAsync(CancellationToken cancellationToken = default)
   {
     var cmd = Command.WithArguments("get clusters");
