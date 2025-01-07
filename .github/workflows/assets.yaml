@@ -29,7 +29,7 @@ jobs:
           commit-message: Update Kind binary to ${{ env.BINARY_VERSION }}
           title: Update Kind binary
           body: |
-            This PR updates the Kind binary used by Devantler.AgeCLI to ${{ env.BINARY_VERSION }}.
+            This PR updates the Kind binary used by Devantler.KindCLI to ${{ env.BINARY_VERSION }}.
           branch: update-kind-binary
           delete-branch: true
           labels: dependencies
