@@ -51,5 +51,5 @@ You can execute the Kind CLI commands using the `Kind` class.
 ```csharp
 using Devantler.KindCLI;
 
-var (exitCode, message) = await Kind.RunAsync(["arg1", "arg2"]);
+var (exitCode, output) = await Kind.RunAsync(["arg1", "arg2"]);
 ```
