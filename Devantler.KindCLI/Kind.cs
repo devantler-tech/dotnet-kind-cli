@@ -1,6 +1,5 @@
 using System.Runtime.InteropServices;
 using CliWrap;
-using CliWrap.Exceptions;
 using Devantler.CLIRunner;
 
 namespace Devantler.KindCLI;
@@ -58,80 +57,5 @@ public static class Kind
       silent: silent,
       includeStdErr: includeStdErr,
       cancellationToken: cancellationToken).ConfigureAwait(false);
-  }
-
-  /// <summary>
-  /// Creates a new Kind cluster.
-  /// </summary>
-  /// <param name="clusterName"></param>
-  /// <param name="configPath"></param>
-  /// <param name="cancellationToken"></param>
-  /// <returns></returns>
-  [Obsolete("This method is deprecated. Use the RunAsync method instead.")]
-  public static async Task CreateClusterAsync(string clusterName, string configPath, CancellationToken cancellationToken = default)
-  {
-    var cmd = Command.WithArguments(
-        [
-          "create",
-          "cluster",
-          $"--name={clusterName}",
-          $"--config={configPath}"
-        ]
-      );
-    try
-    {
-      var (exitCode, _) = await CLI.RunAsync(cmd, cancellationToken: cancellationToken).ConfigureAwait(false);
-      if (exitCode != 0)
-      {
-        throw new KindException($"Failed to create Kind cluster.");
-      }
-    }
-    catch (CommandExecutionException ex)
-    {
-      throw new KindException("Failed to create Kind cluster.", ex);
-    }
-  }
-
-  /// <summary>
-  /// Deletes a Kind cluster.
-  /// </summary>
-  /// <param name="clusterName"></param>
-  /// <param name="cancellationToken"></param>
-  [Obsolete("This method is deprecated. Use the RunAsync method instead.")]
-  public static async Task DeleteClusterAsync(string clusterName, CancellationToken cancellationToken = default)
-  {
-    var cmd = Command.WithArguments($"delete cluster --name {clusterName}");
-    try
-    {
-      var (exitCode, _) = await CLI.RunAsync(cmd, cancellationToken: cancellationToken).ConfigureAwait(false);
-      if (exitCode != 0)
-      {
-        throw new KindException($"Failed to delete Kind cluster. Exit code: {exitCode}");
-      }
-    }
-    catch (CommandExecutionException ex)
-    {
-      throw new KindException("Failed to delete Kind cluster.", ex);
-    }
-  }
-
-  /// <summary>
-  /// Gets all Kind clusters.
-  /// </summary>
-  /// <param name="cancellationToken"></param>
-  [Obsolete("This method is deprecated. Use the RunAsync method instead.")]
-  public static async Task<string[]> GetClustersAsync(CancellationToken cancellationToken = default)
-  {
-    var cmd = Command.WithArguments("get clusters");
-    try
-    {
-      var (_, result) = await CLI.RunAsync(cmd, cancellationToken: cancellationToken).ConfigureAwait(false);
-      string[] clusterNames = result.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
-      return clusterNames;
-    }
-    catch (CommandExecutionException ex)
-    {
-      throw new KindException("Failed to list Kind clusters.", ex);
-    }
   }
 }
