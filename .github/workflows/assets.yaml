@@ -26,8 +26,8 @@ jobs:
       - name: ✍🏻 Create PR
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: Update Kind binary to ${{ env.BINARY_VERSION }}
-          title: Update Kind to ${{ env.BINARY_VERSION }}
+          commit-message: "feat: Update  Kind binary to ${{ env.BINARY_VERSION }}"
+          title: "feat: Update Kind to ${{ env.BINARY_VERSION }}"
           body: |
             This PR updates the Kind binary used by Devantler.KindCLI to ${{ env.BINARY_VERSION }}.
           branch: update-kind-binary
