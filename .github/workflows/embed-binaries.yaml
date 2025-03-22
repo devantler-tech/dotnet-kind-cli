@@ -15,4 +15,5 @@ jobs:
       BINARY_NAME: kind
       DOTNET_PROJECT_NAME: Devantler.KindCLI
       SCRIPT_PATH: scripts/get-kind-binary.sh
+      VERSION_ARGS: version | awk '{print $2}'
 
