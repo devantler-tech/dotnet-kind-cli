@@ -8,13 +8,18 @@ A simple .NET library that embeds the Kind CLI.
 
 ## 🚀 Getting Started
 
+## Prerequisites
+
+- .NET 6.0 or later
+- [Kind CLI](<https://kind.sigs.k8s.io/docs/user/quick-start/#installation>) installed and available in your system's PATH
+
+## Installation
+
 To get started, you can install the package from NuGet.
 
-```bash
+```sh
 dotnet add package DevantlerTech.KindCLI
 ```
-
-For the library to work, you need to have the Kind CLI installed and added to your system's PATH. You can [download the Kind CLI here](https://kind.sigs.k8s.io/docs/user/quick-start/#installation).
 
 ## 📝 Usage
 
