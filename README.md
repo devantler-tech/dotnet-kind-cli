@@ -10,7 +10,7 @@ A simple .NET library that embeds the Kind CLI.
 
 ## Prerequisites
 
-- .NET 6.0 or later
+- .NET 9.0 or later
 - [Kind CLI](<https://kind.sigs.k8s.io/docs/user/quick-start/#installation>) installed and available in your system's PATH
 
 ## Installation

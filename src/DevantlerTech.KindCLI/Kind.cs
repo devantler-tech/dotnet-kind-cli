@@ -31,7 +31,7 @@ public static class Kind
         }
       }
 
-      throw new FileNotFoundException($"The 'kind' CLI was not found in PATH.");
+      throw new FileNotFoundException($"The '{binaryName}' CLI was not found in PATH.");
     }
   }
 
