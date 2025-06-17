@@ -21,6 +21,9 @@ jobs:
         uses: jaxxstorm/action-install-gh-release@v1.10.0
         with:
           repo: kubernetes-sigs/kind
+          extension-matching: disable
+          rename-to: kind
+          chmod: 0755
       - name: Test .NET solution or project
         uses: ./.github/actions/dotnet-test
         with:
