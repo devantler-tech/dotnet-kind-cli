@@ -18,7 +18,7 @@ jobs:
     if: github.event.pull_request.draft == false
     steps:
       - name: Install kind CLI
-        uses: jaxxstorm/action-install-gh-release@v1.10.0
+        uses: jaxxstorm/action-install-gh-release@v2.1.0
         with:
           repo: kubernetes-sigs/kind
           extension-matching: disable
