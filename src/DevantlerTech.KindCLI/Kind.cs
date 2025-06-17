@@ -11,7 +11,29 @@ public static class Kind
   /// <summary>
   /// The Kind CLI command.
   /// </summary>
-  static Command Command => Cli.Wrap("kind");
+  static Command Command
+  {
+    get
+    {
+      string binaryName = OperatingSystem.IsWindows() ? "kind.exe" : "kind";
+      string? pathEnv = Environment.GetEnvironmentVariable("PATH");
+
+      if (!string.IsNullOrEmpty(pathEnv))
+      {
+        string[] paths = pathEnv.Split(Path.PathSeparator);
+        foreach (string dir in paths)
+        {
+          string fullPath = Path.Combine(dir, binaryName);
+          if (File.Exists(fullPath))
+          {
+            return Cli.Wrap(fullPath);
+          }
+        }
+      }
+
+      throw new FileNotFoundException($"The 'kind' CLI was not found in PATH.");
+    }
+  }
 
   /// <summary>
   /// Runs the kind CLI command with the given arguments.
