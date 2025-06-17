@@ -11,3 +11,4 @@ jobs:
   test:
     uses: devantler-tech/workflows/.github/workflows/dotnet-test.yaml@main
     secrets: inherit
+
