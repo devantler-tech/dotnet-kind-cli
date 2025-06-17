@@ -15,7 +15,7 @@ public static class Kind
   {
     get
     {
-      string binaryName = OperatingSystem.IsWindows() ? "kind.exe" : "kind";
+      string binaryName = "kind";
       string? pathEnv = Environment.GetEnvironmentVariable("PATH");
 
       if (!string.IsNullOrEmpty(pathEnv))
