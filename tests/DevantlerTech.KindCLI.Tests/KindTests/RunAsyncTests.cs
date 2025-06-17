@@ -1,6 +1,6 @@
 using CliWrap;
 
-namespace Devantler.KindCLI.Tests.KindTests;
+namespace DevantlerTech.KindCLI.Tests.KindTests;
 
 /// <summary>
 /// Tests for the <see cref="Kind.RunAsync(string[], CommandResultValidation, bool, bool, CancellationToken)" /> method.

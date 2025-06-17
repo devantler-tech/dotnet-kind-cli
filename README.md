@@ -11,7 +11,7 @@ A simple .NET library that embeds the Kind CLI.
 To get started, you can install the package from NuGet.
 
 ```bash
-dotnet add package Devantler.KindCLI
+dotnet add package DevantlerTech.KindCLI
 ```
 
 ## 📝 Usage
@@ -19,7 +19,7 @@ dotnet add package Devantler.KindCLI
 You can execute the Kind CLI commands using the `Kind` class.
 
 ```csharp
-using Devantler.KindCLI;
+using DevantlerTech.KindCLI;
 
 var (exitCode, message) = await Kind.RunAsync(["arg1", "arg2"]);
 ```

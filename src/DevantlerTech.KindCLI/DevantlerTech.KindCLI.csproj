@@ -16,6 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Devantler.KindCLI.Tests" />
+    <InternalsVisibleTo Include="DevantlerTech.KindCLI.Tests" />
   </ItemGroup>
 </Project>

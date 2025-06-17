@@ -1,7 +1,7 @@
 using CliWrap;
 using CliWrap.Buffered;
 
-namespace Devantler.KindCLI;
+namespace DevantlerTech.KindCLI;
 
 /// <summary>
 /// A class to run Kind CLI commands.
