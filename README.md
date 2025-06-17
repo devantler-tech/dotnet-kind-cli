@@ -14,6 +14,8 @@ To get started, you can install the package from NuGet.
 dotnet add package DevantlerTech.KindCLI
 ```
 
+For the library to work, you need to have the Kind CLI installed and added to your system's PATH. You can [download the Kind CLI here](https://kind.sigs.k8s.io/docs/user/quick-start/#installation).
+
 ## 📝 Usage
 
 You can execute the Kind CLI commands using the `Kind` class.
