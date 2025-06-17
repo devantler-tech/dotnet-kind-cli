@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using CliWrap;
 using CliWrap.Buffered;
 
@@ -12,34 +11,7 @@ public static class Kind
   /// <summary>
   /// The Kind CLI command.
   /// </summary>
-  static Command Command => GetCommand();
-
-  internal static Command GetCommand(PlatformID? platformID = default, Architecture? architecture = default, string? runtimeIdentifier = default)
-  {
-    platformID ??= Environment.OSVersion.Platform;
-    architecture ??= RuntimeInformation.ProcessArchitecture;
-    runtimeIdentifier ??= RuntimeInformation.RuntimeIdentifier;
-
-    string binary = (platformID, architecture, runtimeIdentifier) switch
-    {
-      (PlatformID.Unix, Architecture.X64, "osx-x64") => "kind-osx-x64",
-      (PlatformID.Unix, Architecture.Arm64, "osx-arm64") => "kind-osx-arm64",
-      (PlatformID.Unix, Architecture.X64, "linux-x64") => "kind-linux-x64",
-      (PlatformID.Unix, Architecture.Arm64, "linux-arm64") => "kind-linux-arm64",
-      (PlatformID.Win32NT, Architecture.X64, "win-x64") => "kind-win-x64.exe",
-      _ => throw new PlatformNotSupportedException($"Unsupported platform: {Environment.OSVersion.Platform} {RuntimeInformation.ProcessArchitecture}"),
-    };
-    string binaryPath = Path.Combine(AppContext.BaseDirectory, binary);
-    if (!File.Exists(binaryPath))
-    {
-      throw new FileNotFoundException($"{binaryPath} not found.");
-    }
-    if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-    {
-      File.SetUnixFileMode(binaryPath, UnixFileMode.UserExecute | UnixFileMode.GroupExecute | UnixFileMode.OtherExecute);
-    }
-    return Cli.Wrap(binaryPath);
-  }
+  static Command Command => Cli.Wrap("kind");
 
   /// <summary>
   /// Runs the kind CLI command with the given arguments.
